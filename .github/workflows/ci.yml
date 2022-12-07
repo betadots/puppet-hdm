@@ -31,7 +31,7 @@ jobs:
         run: bundle exec rake rubocop
       - name: Setup Test Matrix
         id: get-outputs
-        run: bundle exec metadata2gha --use-fqdn --pidfile-workaround false
+        run: bundle exec metadata2gha --domain ${{ github.run_attempt }}-${{ github.run_id }}-${{ github.sha }}.example.com --pidfile-workaround false
 
   unit:
     needs: setup_matrix
@@ -77,6 +77,8 @@ jobs:
         env:
           BEAKER_PUPPET_COLLECTION: ${{ matrix.puppet.collection }}
           BEAKER_setfile: ${{ matrix.setfile.value }}
+          BEAKER_HYPERVISOR: 'hcloud'
+          HCLOUD_TOKEN: '${{ secrets.HCLOUD_TOKEN }}'
 
   tests:
     needs:
