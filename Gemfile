@@ -1,10 +1,10 @@
 source ENV['GEM_SOURCE'] || "https://rubygems.org"
 
 group :test do
-  gem 'voxpupuli-test', '~> 2.5',   :require => false
+  gem 'voxpupuli-test', '~> 5',     :require => false
   gem 'coveralls',                  :require => false
   gem 'simplecov-console',          :require => false
-  gem 'puppet_metadata', '~> 1.0',  :require => false
+  gem 'puppet_metadata', git: 'https://github.com/bastelfreak/puppet_metadata', branch: 'foo2'
 end
 
 group :development do
@@ -15,6 +15,7 @@ end
 
 group :system_tests do
   gem 'voxpupuli-acceptance', '~> 1.0',  :require => false
+  gem 'beaker-hcloud', require: false, git: 'https://github.com/bastelfreak/beaker-hcloud', branch: 'fqdn'
 end
 
 group :release do
